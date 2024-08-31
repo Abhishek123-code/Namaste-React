@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Headerbar from "./header.js";
 
 const elem = <span>React Element</span>;
 
@@ -22,3 +23,7 @@ const HeadingComponent = () => (
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<HeadingComponent />);
+
+const rootHeader=ReactDOM.createRoot(document.getElementById("header"));
+
+rootHeader.render(<Headerbar />)

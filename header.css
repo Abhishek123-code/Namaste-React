@@ -1,0 +1,34 @@
+#headerNav{
+    padding: 4px 10px;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+#header{
+    background: rgba(224, 224, 224, 0.8);
+    backdrop-filter: blur(9px);
+    border-radius: 50px;
+}
+.logo{
+    width: 100px;
+    height: 60px;
+}
+
+.profilePic{
+    height: 40px;
+}
+
+#search{
+    height: 50px;
+    width: 500px;
+    border-radius: 30px;
+    line-height: 50px;
+    padding: 10px;
+    font-size: large;
+    border: 0px;
+    border-bottom: 2px;
+    border-bottom-style:outset;
+}
