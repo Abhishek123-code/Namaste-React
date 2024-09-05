@@ -59,24 +59,24 @@
     flex: 0 0 18%;
 }
 
-#resCard{
+.resCard{
     width: 200px;
     height: 400px;
     padding: 5px;
     box-sizing: border-box;
 }
 
-#resCard:hover{
+.resCard:hover{
    padding: 15px;
    cursor: pointer;
 }
 
-#resImg{
+.resImg{
     height: 50%;
     border-radius: 20px;
 }
 
-#res-img{
+.res-img{
     width: 100%;
     height: 100%;
     border: none;
@@ -86,4 +86,9 @@
 
 .profilePic{
     height: 40px;
+}
+
+.filter{
+    margin: 10px;
+    cursor: pointer;
 }
