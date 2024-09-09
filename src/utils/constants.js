@@ -3,3 +3,5 @@ export const CDN_URL =
 export const LOGO_URL =
   "https://img.freepik.com/premium-vector/logo-chefs-food_326031-194.jpg";
 
+export const MENU_URL =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.4594965&lng=77.0266383&restaurantId=";
