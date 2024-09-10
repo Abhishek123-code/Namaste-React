@@ -2,6 +2,7 @@ import ResCard from "./ResCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
@@ -10,7 +11,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
   console.log("rendered body");
 
@@ -30,71 +31,11 @@ const Body = () => {
     );
   };
 
-
-//   const fetchData = async () => {
-//     // Define the URL for the POST request
-//     const postUrl = 'https://www.swiggy.com/dapi/restaurants/list/update'; // Replace with your API endpoint
-
-//     // Define the data payload for the POST request
-//     const postData = {
-//         lat: "22.51800",
-//         lng: "88.38320",
-//         nextOffset: "CJhlELQ4KIDwy5SxkL7fazCnEw==",
-//         filters: {},
-//         page_type: "DESKTOP_WEB_LISTING",
-//         seoParams: {
-//             seoUrl: "https://www.swiggy.com/",
-//             pageType: "FOOD_HOMEPAGE",
-//             apiName: "FoodHomePage"
-//         },
-//         apiName: "FoodHomePage",
-//         pageType: "FOOD_HOMEPAGE",
-//         seoUrl: "https://www.swiggy.com/",
-//         widgetOffset: {
-//             NewListingView_category_bar_chicletranking_TwoRows: "",
-//             NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
-//             Restaurant_Group_WebView_SEO_PB_Theme: "",
-//             collectionV5RestaurantListWidget_SimRestoRelevance_food_seo: "39",
-//             inlineFacetFilter: "",
-//             restaurantCountWidget: ""
-//         },
-//         _csrf: "48bjz6DvvrKL-SBwAzZaIY5idV_eo-DnwufudK2A"
-//     };
-
-//     try {
-//         // Make the POST request
-//         const postResponse = await fetch(postUrl, {
-//             mode: 'no-cors',
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(postData)
-//         });
-
-//         const postResult = await postResponse.json();
-//         console.log('POST Success:', postResult);
-
-//         // Make the GET request
-//         const getResponse = await fetch(
-//             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.51800&lng=88.38320&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-//         );
-
-//         const getResult = await getResponse.json();
-//         console.log('GET Success:', getResult);
-
-//         // Update state with the fetched data
-//         setlistOfResturants(
-//             getResult?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-//         );
-//         setfilteredRestaurant(
-//             getResult?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-//         );
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// };
-
+  const onlineStatus=useOnlineStatus();
+  if(onlineStatus===false)
+  {
+    return <h1>Looks like you are Offline. Please Check your Connection</h1>
+  }
 
   //conditional rendering
   return listOfResturants.length === 0 ? (
@@ -144,7 +85,13 @@ const Body = () => {
 
       <div id="resCollection">
         {filteredRestaurant.map((shop) => (
-         <Link className="link" to={"/restaurants/"+ shop.info.id} key={shop.info.id}><ResCard resDetails={shop} /></Link> 
+          <Link
+            className="link"
+            to={"/restaurants/" + shop.info.id}
+            key={shop.info.id}
+          >
+            <ResCard resDetails={shop} />
+          </Link>
         ))}
       </div>
     </div>
