@@ -31,10 +31,9 @@ const Body = () => {
     );
   };
 
-  const onlineStatus=useOnlineStatus();
-  if(onlineStatus===false)
-  {
-    return <h1>Looks like you are Offline. Please Check your Connection</h1>
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return <h1>Looks like you are Offline. Please Check your Connection</h1>;
   }
 
   //conditional rendering
@@ -42,56 +41,52 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div id="resBody">
-      <div className="filter">
-        <div className="search">
-          <input
-            type="text"
-            className="search-box"
-            value={searchText}
-            onChange={(e) => {
-              setsearchText(e.target.value);
-            }}
-            placeholder="Search resturants..."
-          />
-
-          <button
-            className="searchBtn"
-            onClick={() => {
-              console.log(searchText);
-              const filteredRes = listOfResturants.filter((el) =>
-                el.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              console.log(listOfResturants);
-              setfilteredRestaurant(filteredRes);
-            }}
-          >
-            search
-          </button>
-        </div>
+      <div className="m-2 p-4 flex">
+        <input
+          type="text"
+          className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300"
+          value={searchText}
+          onChange={(e) => {
+            setsearchText(e.target.value);
+          }}
+          placeholder="Search resturants..."
+        />
 
         <button
-          className="filter-btn"
+          className="bg-purple-300 p-2 mx-3 rounded-3xl w-24 hover:bg-green-400 duration-500"
           onClick={() => {
-            setlistOfResturants();
+            console.log(searchText);
+            const filteredRes = listOfResturants.filter((el) =>
+              el.info.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            console.log(listOfResturants);
+            setfilteredRestaurant(filteredRes);
+          }}
+        >
+          search
+        </button>
+
+        <button
+          className="bg-purple-300 p-2 mx-3 rounded-3xl w-52 hover:bg-red-300 duration-500"
+          onClick={() => {
             const filteredList = listOfResturants.filter(
               (res) => res.info.avgRating >= 4.5
             );
-            setlistOfResturants(filteredList);
+            console.log(filteredList);
+            setfilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restarunts
         </button>
       </div>
 
-      <div id="resCollection">
+      <div className="flex flex-wrap justify-start gap-x-8 gap-y-3 w-[98%] mx-7">
         {filteredRestaurant.map((shop) => (
-          <Link
-            className="link"
-            to={"/restaurants/" + shop.info.id}
-            key={shop.info.id}
-          >
-            <ResCard resDetails={shop} />
-          </Link>
+          <div className="flex-[0_0_18%] w-64" key={shop.info.id}>
+            <Link className="" to={"/restaurants/" + shop.info.id}>
+              <ResCard resDetails={shop} />
+            </Link>
+          </div>
         ))}
       </div>
     </div>

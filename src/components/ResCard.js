@@ -6,21 +6,21 @@ const ResCard = (props) => {
     resDetails?.info;
 
   return (
-    <div className="resCard item">
-      <div className="resImg">
+    <div className="p-0 h-80 hover:p-2 duration-200 box-border ">
+      <div className="mb-3 h-[50%]  rounded-2xl ">
         <img
           src={CDN_URL + cloudinaryImageId}
-          className="res-img"
+          className="object-cover rounded-2xl w-[100%] h-[100%] "
           alt="Res-Img"
         />
       </div>
 
-      <div className="resInfo">
-        <h4>{name}</h4>
-        <span>{avgRating}</span>
-        <span>{sla.slaString}</span>
-        <p>{cuisines.join(", ")}</p>
-        <p>{costForTwo}</p>
+      <div className="px-3 ">
+        <h3 className="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">{name}</h3>
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis">{avgRating}</span>
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis">{sla.slaString}</span>
+        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{cuisines.join(", ")}</p>
+        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{costForTwo}</p>
       </div>
     </div>
   );
