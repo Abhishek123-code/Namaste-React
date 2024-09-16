@@ -16,14 +16,33 @@ const ResCard = (props) => {
       </div>
 
       <div className="px-3 ">
-        <h3 className="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">{name}</h3>
-        <span className="overflow-hidden whitespace-nowrap text-ellipsis">{avgRating}</span>
-        <span className="overflow-hidden whitespace-nowrap text-ellipsis">{sla.slaString}</span>
-        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{cuisines.join(", ")}</p>
-        <p className="overflow-hidden whitespace-nowrap text-ellipsis">{costForTwo}</p>
+        <h3 className="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">
+          {name}
+        </h3>
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis">
+          {avgRating}
+        </span>
+        <span className="overflow-hidden whitespace-nowrap text-ellipsis">
+          {sla.slaString}
+        </span>
+        <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+          {cuisines.join(", ")}
+        </p>
+        <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+          {costForTwo}
+        </p>
       </div>
     </div>
   );
 };
-
+export const isResOpen = (ResCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="bg-green-600 absolute text-white p-1 px-2 rounded-lg  ">OpenNow</label>
+        <ResCard {...props} />
+      </div>
+    );
+  };
+};
 export default ResCard;

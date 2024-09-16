@@ -1,8 +1,9 @@
-import ResCard from "./ResCard";
-import { useState, useEffect } from "react";
+import ResCard, { isResOpen } from "./ResCard";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfResturants, setlistOfResturants] = useState([]);
@@ -13,7 +14,7 @@ const Body = () => {
     fetchData();
   }, []);
 
-  console.log("rendered body");
+  const OpenRes = isResOpen(ResCard);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -36,15 +37,17 @@ const Body = () => {
     return <h1>Looks like you are Offline. Please Check your Connection</h1>;
   }
 
+  const { loggedUser, setuser } = useContext(UserContext);
+
   //conditional rendering
   return listOfResturants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="mt-2">
-      <div className="m-2 p-4 flex">
+    <div className="mt-2 max-w-full box-border">
+      <div className="m-2 p-4 flex box-border ">
         <input
           type="text"
-          className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300"
+          className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300 box-border"
           value={searchText}
           onChange={(e) => {
             setsearchText(e.target.value);
@@ -53,7 +56,7 @@ const Body = () => {
         />
 
         <button
-          className="bg-purple-300 p-2 mx-3 rounded-3xl w-24 hover:bg-green-400 duration-500"
+          className="bg-purple-300 p-2 mx-3 rounded-3xl w-24 hover:bg-green-400 duration-500 box-border"
           onClick={() => {
             console.log(searchText);
             const filteredRes = listOfResturants.filter((el) =>
@@ -67,7 +70,7 @@ const Body = () => {
         </button>
 
         <button
-          className="bg-purple-300 p-2 mx-3 rounded-3xl w-52 hover:bg-red-300 duration-500"
+          className="bg-purple-300 p-2 mx-3 rounded-3xl w-52 hover:bg-red-300 duration-500 box-border"
           onClick={() => {
             const filteredList = listOfResturants.filter(
               (res) => res.info.avgRating >= 4.5
@@ -78,13 +81,29 @@ const Body = () => {
         >
           Top Rated Restarunts
         </button>
+        
+        <div className="flex">
+          <label className="text-center">User Name:</label>
+          <input
+            type="text"
+            className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300 box-border"
+            value={loggedUser}
+            onChange={(e) => {
+              setuser(e.target.value);
+            }}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-wrap justify-start gap-x-8 gap-y-3 w-[98%] mx-7">
+      <div className="flex flex-wrap justify-start gap-x-8 gap-y-3 w-[98%] mx-7 box-border">
         {filteredRestaurant.map((shop) => (
           <div className="flex-[0_0_18%] w-64" key={shop.info.id}>
             <Link className="" to={"/restaurants/" + shop.info.id}>
-              <ResCard resDetails={shop} />
+              {shop.info.isOpen ? (
+                <OpenRes resDetails={shop} />
+              ) : (
+                <ResCard resDetails={shop} />
+              )}
             </Link>
           </div>
         ))}

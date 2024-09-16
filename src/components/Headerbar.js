@@ -1,26 +1,36 @@
 import { Link } from "react-router-dom";
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import PrfLogo from "../assests/Style=broken.png";
 import CrtLogo from "../assests/cart.png";
+import UserContext from "../utils/UserContext";
 
 const Headerbar = () => {
   let [btnName, setbtnName] = useState("Login");
   console.log("header render");
 
   const onlineStatus = useOnlineStatus();
+  const {loggedUser} = useContext(UserContext); 
 
   return (
     <header
       id="header"
-      className="lg:bg-white sm:bg-yellow-50 shadow-md box-border"
+      className="lg:bg-white sm:bg-yellow-50 shadow-md box-border max-w-full"
     >
-      <nav id="headerNav" className="flex justify-between items-center p-2 ">
-        <img src={LOGO_URL} alt="logo" className="w-20" />
+      <nav
+        id="headerNav"
+        className="flex justify-between items-center p-2 box-border max-w-full"
+      >
+        <div className="box-border">
+          <img src={LOGO_URL} alt="logo" className="w-20" />
+        </div>
 
-        <ul id="nav-list" className="flex justify-center items-center">
+        <ul
+          id="nav-list"
+          className="flex justify-end items-center object-contain box-border"
+        >
           <p className="px-2">Online Status: {onlineStatus ? "✅" : "🔴"}</p>
           <li className="w-20 flex justify-center hover:py-2 hover:text-lg hover:rounded-lg hover:text-orange-400 hover:font-semibold">
             <Link className="link" to="/">
@@ -51,6 +61,9 @@ const Headerbar = () => {
             >
               {btnName}
             </button>
+          </li>
+          <li className="w-24  flex justify-center items-center">
+            {loggedUser}
           </li>
         </ul>
       </nav>
