@@ -22,7 +22,6 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
 
     setlistOfResturants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -82,8 +81,8 @@ const Body = () => {
           Top Rated Restarunts
         </button>
         
-        <div className="flex">
-          <label className="text-center">User Name:</label>
+        <div className="flex items-center ">
+          <label className="text-center text-black font-bold bg-gray-200 h-full flex items-center p-2 rounded-3xl">User Name </label>
           <input
             type="text"
             className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300 box-border"

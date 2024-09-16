@@ -8,7 +8,7 @@ const RestaurantMenu = () => {
   const { resMenu } = useParams();
   // console.log(resMenu);
 
-  const [showIndex,setshowIndex] =useState(null);
+  const [showIndex, setshowIndex] = useState(null);
 
   //fetching the data
   const resInfo = useRestaurants(resMenu);
@@ -29,20 +29,22 @@ const RestaurantMenu = () => {
     );
 
   return (
-    <div className="text-center">
+    <div className="text-center ">
       <h1 className="text-4xl font-bold my-7">{name}</h1>
       <h3 className="text-xl font-bold">{cuisines.join(", ")}</h3>
       <h3 className="text-xl font-bold">
         {avgRating} - {costForTwoMessage}
       </h3>
-
+    
       {categories.map((Category, index) => (
         //controlled component
         <RestaurantCategory
           data={Category?.card?.card}
           key={Category?.card?.card?.title}
           showItems={index === showIndex && true}
-          setshowIndex={()=>showIndex!== null? setshowIndex(null) :setshowIndex(index)}
+          setshowIndex={() =>
+            showIndex !== null ? setshowIndex(null) : setshowIndex(index)
+          }
         />
       ))}
     </div>
