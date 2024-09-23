@@ -46,6 +46,7 @@ const Body = () => {
       <div className="m-2 p-4 flex box-border ">
         <input
           type="text"
+          data-testid="searchInput"
           className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300 box-border"
           value={searchText}
           onChange={(e) => {
@@ -57,11 +58,9 @@ const Body = () => {
         <button
           className="bg-purple-300 p-2 mx-3 rounded-3xl w-24 hover:bg-green-400 duration-500 box-border"
           onClick={() => {
-            console.log(searchText);
             const filteredRes = listOfResturants.filter((el) =>
               el.info.name.toLowerCase().includes(searchText.toLowerCase())
             );
-            console.log(listOfResturants);
             setfilteredRestaurant(filteredRes);
           }}
         >
@@ -74,15 +73,16 @@ const Body = () => {
             const filteredList = listOfResturants.filter(
               (res) => res.info.avgRating >= 4.5
             );
-            console.log(filteredList);
             setfilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restarunts
         </button>
-        
+
         <div className="flex items-center ">
-          <label className="text-center text-black font-bold bg-gray-200 h-full flex items-center p-2 rounded-3xl">User Name </label>
+          <label className="text-center text-black font-bold bg-gray-200 h-full flex items-center p-2 rounded-3xl">
+            User Name{" "}
+          </label>
           <input
             type="text"
             className="focus:ring-green-600 focus:ring-1 focus:outline-none border rounded-3xl px-2 h-12  w-96 active:border-green-300 box-border"

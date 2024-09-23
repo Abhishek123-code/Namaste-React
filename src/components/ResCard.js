@@ -2,11 +2,15 @@ import { CDN_URL } from "../utils/constants";
 
 const ResCard = (props) => {
   const { resDetails } = props;
+
   const { name, avgRating, cuisines, costForTwo, sla, cloudinaryImageId } =
     resDetails?.info;
 
   return (
-    <div className="p-0 h-80 hover:p-2 duration-200 box-border ">
+    <div
+      data-testid="resCard"
+      className="p-0 h-80 hover:p-2 duration-200 box-border "
+    >
       <div className="mb-3 h-[50%]  rounded-2xl ">
         <img
           src={CDN_URL + cloudinaryImageId}
@@ -39,7 +43,9 @@ export const isResOpen = (ResCard) => {
   return (props) => {
     return (
       <div>
-        <label className="bg-green-600 absolute text-white p-1 px-2 rounded-lg  ">OpenNow</label>
+        <label className="bg-green-600 absolute text-white p-1 px-2 rounded-lg  ">
+          OpenNow
+        </label>
         <ResCard {...props} />
       </div>
     );

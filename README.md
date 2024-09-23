@@ -23,6 +23,19 @@
 - -contacts
   \*/
 
+#setting up test library
+Install React Testing Library
+
+- Install Jest
+- Install Babel Dependencies
+- Configure Babel
+- Configure Parcel Config File to disable default Babel transpilation
+- Jest - `npx jest --init`
+- Install jsdom library
+- Install @babel/preset-react - to make JSX work in test cases
+- Include @babel/preset-react inside my babel config
+- npm i -D @testing-library/jest-dom
+
 const fetchData = async () => {
 // // Define the URL for the POST request
 // const postUrl = 'https://www.swiggy.com/dapi/restaurants/list/update'; // Replace with your API endpoint

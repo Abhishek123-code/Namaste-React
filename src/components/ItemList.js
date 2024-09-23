@@ -13,6 +13,7 @@ const ItemList = ({ items }) => {
     <div className="transition-all duration-300 ease-in-out">
       {items.map((item) => (
         <div
+          data-testid="foodItems"
           key={item?.card?.info?.id}
           className="p-2 m-2 border-b-2 text-left  flex h-52"
         >
@@ -45,7 +46,7 @@ const ItemList = ({ items }) => {
             </div>
             <button
               className="p-2 rounded-lg bg-black text-white relative bottom-4 hover:bg-red-400"
-              onClick={()=>handleAddItem(item)}
+              onClick={() => handleAddItem(item)}
             >
               Add+
             </button>
